@@ -8,3 +8,11 @@ pub fn index() -> Json<Home> {
         endpoint: vec!["/recurso".to_string()],
     })
 }
+
+#[get("/unauthorized")]
+pub fn not_authorized() -> Json<Home> {
+    Json(Home {
+        title: "Unauthorized".to_string(),
+        endpoint: vec!["/login".to_string()],
+    })
+}
