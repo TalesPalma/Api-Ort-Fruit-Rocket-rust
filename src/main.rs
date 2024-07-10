@@ -6,6 +6,7 @@ mod middlewares;
 mod models;
 mod models_view;
 mod service;
+mod tests;
 use controllers::*;
 
 #[launch]
