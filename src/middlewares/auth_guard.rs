@@ -24,7 +24,7 @@ impl Fairing for JwtFairing {
             .headers()
             .get_one("Authorization")
             .and_then(|header| header.strip_prefix("Bearer "))
-            .map(|token| verificar_token(token))
+            .map(verificar_token)
             .unwrap_or(false);
 
         if !token_valid {
