@@ -1,2 +1,2 @@
 pub mod login_dto;
-pub mod recurso_dto;
+pub mod product_dto;

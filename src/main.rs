@@ -13,6 +13,7 @@ use controllers::*;
 
 #[launch]
 fn rocket() -> _ {
+    let teste = database::database_config::get_conection();
     rocket::build()
         //.attach(middlewares::auth_guard::JwtFairing)
         .mount(
@@ -20,10 +21,8 @@ fn rocket() -> _ {
             routes![
                 home_controller::index,
                 home_controller::not_authorized,
-                recursos_controller::index,
-                recursos_controller::create,
-                recursos_controller::modify,
-                recursos_controller::delete,
+                products_controller::index,
+                products_controller::create,
                 login_controller::login,
             ],
         )
