@@ -23,3 +23,10 @@ pub(crate) fn delete_product_service(prod_id: i32) -> Result<(), String> {
         Err(value) => Err(format!("Error with delete {}", value)),
     }
 }
+
+pub fn update_product_service(prod_id: i32, new_product: ProductDto) -> Result<ProductDto, String> {
+    match update_product(prod_id, new_product) {
+        Ok(value) => Ok(value),
+        Err(msg_error) => Err(format!("Error with update {}", msg_error)),
+    }
+}

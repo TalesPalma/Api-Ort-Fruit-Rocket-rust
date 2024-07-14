@@ -44,3 +44,20 @@ pub fn delete_product(prod_id: i32) -> Result<(), diesel::result::Error> {
     diesel::delete(products.filter(id.eq(prod_id))).execute(conn)?;
     Ok(())
 }
+
+pub fn update_product(
+    prod_id: i32,
+    new_product: ProductDto,
+) -> Result<ProductDto, diesel::result::Error> {
+    let conn = &mut get_conection();
+
+    diesel::update(products.filter(id.eq(prod_id)))
+        .set((
+            name.eq(new_product.name.clone()),
+            price.eq(new_product.price.clone()),
+            description.eq(new_product.description.clone()),
+        ))
+        .execute(conn)?;
+
+    Ok(new_product)
+}

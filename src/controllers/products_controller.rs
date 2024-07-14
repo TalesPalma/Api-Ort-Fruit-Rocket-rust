@@ -1,7 +1,7 @@
 use crate::database::models::product::Product;
 use crate::dtos::product_dto::ProductDto;
 use crate::models::error_json::ErrorJson;
-use crate::service::product_service;
+use crate::service::product_service::{self, update_product_service};
 use rocket::http::Status;
 use rocket::response::status;
 use rocket::serde::json::Json;
@@ -30,6 +30,21 @@ pub fn create(
 pub fn delete(id_user: i32) -> Result<status::NoContent, status::Custom<Json<ErrorJson>>> {
     match product_service::delete_product_service(id_user) {
         Ok(_) => Ok(status::NoContent),
+        Err(msg_error) => Err(status::Custom(
+            Status::BadRequest,
+            Json(ErrorJson::new(msg_error.as_str())),
+        )),
+    }
+}
+
+#[put("/products/<id_user>", data = "<new_product_dto>")]
+pub fn update(
+    id_user: i32,
+    new_product_dto: Json<ProductDto>,
+) -> Result<(), status::Custom<Json<ErrorJson>>> {
+    let new = new_product_dto.into_inner();
+    match update_product_service(id_user, new) {
+        Ok(_) => Ok(()),
         Err(msg_error) => Err(status::Custom(
             Status::BadRequest,
             Json(ErrorJson::new(msg_error.as_str())),

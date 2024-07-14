@@ -23,6 +23,7 @@ fn rocket() -> _ {
                 products_controller::index,
                 products_controller::create,
                 products_controller::delete,
+                products_controller::update,
                 login_controller::login,
             ],
         )
