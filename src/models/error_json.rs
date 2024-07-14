@@ -11,10 +11,4 @@ impl ErrorJson {
             message: message.to_string(),
         }
     }
-
-    pub fn default() -> Self {
-        Self {
-            message: "Error".to_string(),
-        }
-    }
 }

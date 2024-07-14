@@ -4,11 +4,10 @@ use crate::{
 };
 
 pub fn get_products_service() -> Vec<Product> {
-    let products_vec = match get_products() {
+    match get_products() {
         Ok(value) => value,
         Err(_) => vec![],
-    };
-    products_vec
+    }
 }
 
 pub fn create_product_service(new_prodcut: &ProductDto) -> Result<Product, String> {
@@ -18,14 +17,9 @@ pub fn create_product_service(new_prodcut: &ProductDto) -> Result<Product, Strin
     }
 }
 
-// pub(crate) fn modify_recurso(
-//     _id: u32,
-//     new_user: Recurso,
-// ) -> Result<Product, diesel::result::Error> {
-//
-// }
-
-// pub(crate) fn delete_recurso(id: u32) -> Result<Product, std::io::Error> {
-//
-//     }
-// }
+pub(crate) fn delete_product_service(prod_id: i32) -> Result<(), String> {
+    match delete_product(prod_id) {
+        Ok(_) => Ok(()),
+        Err(value) => Err(format!("Error with delete {}", value)),
+    }
+}

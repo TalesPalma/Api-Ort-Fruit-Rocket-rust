@@ -13,7 +13,6 @@ use controllers::*;
 
 #[launch]
 fn rocket() -> _ {
-    let teste = database::database_config::get_conection();
     rocket::build()
         //.attach(middlewares::auth_guard::JwtFairing)
         .mount(
@@ -23,6 +22,7 @@ fn rocket() -> _ {
                 home_controller::not_authorized,
                 products_controller::index,
                 products_controller::create,
+                products_controller::delete,
                 login_controller::login,
             ],
         )

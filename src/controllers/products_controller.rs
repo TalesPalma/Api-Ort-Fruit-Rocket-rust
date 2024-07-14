@@ -26,37 +26,13 @@ pub fn create(
     }
 }
 
-// #[put("/recurso/<id>", data = "<cliente_dto>")]
-// pub fn modify(
-//     id: u32,
-//     cliente_dto: Json<RecursoDTO>,
-// ) -> Result<status::Custom<Json<RecursoDTO>>, status::Custom<Json<ErrorJson>>> {
-//     let recurso = cliente_dto.into_inner();
-//
-//     let new_recurso = recursos_service::modify_recurso(
-//         id,
-//         Recurso {
-//             id: 0,
-//             name: recurso.name.clone(),
-//             description: recurso.description.clone(),
-//         },
-//     );
-//
-//     match new_recurso {
-//         Ok(_) => Ok(status::Custom(Status::Ok, Json(recurso))),
-//         Err(_) => Err(status::Custom(
-//             Status::BadRequest,
-//             Json(ErrorJson::new("Error ao modificar")),
-//         )),
-//     }
-// }
-//
-// #[delete("/recurso/<id>")]
-// pub fn delete(id: u32) -> Result<status::NoContent, status::BadRequest<Json<ErrorJson>>> {
-//     match recursos_service::delete_recurso(id) {
-//         Ok(_) => Ok(status::NoContent),
-//         Err(_) => Err(status::BadRequest(Json(ErrorJson::new(
-//             "Error with delete data",
-//         )))),
-//     }
-// }
+#[delete("/products/<id_user>")]
+pub fn delete(id_user: i32) -> Result<status::NoContent, status::Custom<Json<ErrorJson>>> {
+    match product_service::delete_product_service(id_user) {
+        Ok(_) => Ok(status::NoContent),
+        Err(msg_error) => Err(status::Custom(
+            Status::BadRequest,
+            Json(ErrorJson::new(msg_error.as_str())),
+        )),
+    }
+}

@@ -38,3 +38,9 @@ pub fn create_product(new_product: ProductDto) -> Result<Product, diesel::result
             .first(conn)
     })
 }
+
+pub fn delete_product(prod_id: i32) -> Result<(), diesel::result::Error> {
+    let conn = &mut get_conection();
+    diesel::delete(products.filter(id.eq(prod_id))).execute(conn)?;
+    Ok(())
+}
