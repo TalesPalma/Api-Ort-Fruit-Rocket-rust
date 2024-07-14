@@ -6,4 +6,4 @@ file = "src/schema.rs"
 custom_type_derives = ["diesel::query_builder::QueryId", "Clone"]
 
 [migrations_directory]
-dir = "/home/talespalma/Documents/projects/full_stack_rust_project/rocket-json/migrations"
+dir = "/home/talespalma/Documents/projects/full_stack_rust_project/rocket-back-end/migrations"

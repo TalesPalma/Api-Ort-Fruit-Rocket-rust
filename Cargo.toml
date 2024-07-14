@@ -1,5 +1,5 @@
 [package]
-name = "rocket-json"
+name = "rocket-back-end"
 version = "0.1.0"
 edition = "2021"
 
