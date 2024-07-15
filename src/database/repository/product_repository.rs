@@ -8,7 +8,7 @@ use diesel::prelude::*;
 
 pub fn get_products() -> Result<Vec<Product>, diesel::result::Error> {
     let conn = &mut get_conection();
-    let result = products.limit(5).select(Product::as_select()).load(conn)?;
+    let result = products.limit(10).select(Product::as_select()).load(conn)?;
     Ok(result)
 }
 
@@ -16,7 +16,7 @@ pub fn get_products_by_id(prod_id: i32) -> Result<Product, diesel::result::Error
     let conn = &mut get_conection();
     let result = products
         .filter(id.eq(prod_id))
-        .limit(5)
+        .limit(1)
         .select(Product::as_select())
         .first(conn)?;
 
